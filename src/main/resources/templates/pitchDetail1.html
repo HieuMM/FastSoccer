@@ -170,8 +170,6 @@
                                 <div class="product-price-discount"><span id="price">Gía: 0</span></div>
                             </div>
 
-
-                            <p th:text="'Dịch vụ: '+${ownPitch.getService()}"></p>
                             <div class="row">
                                 <div class="col-md-6">
 
@@ -230,7 +228,7 @@
                     <div class="tab-content" id="myTabContent">
                         <div class="tab-pane fade show active" id="description" role="tabpanel"
                              aria-labelledby="description-tab">
-                            Mô tả
+                            <p th:text="'Dịch vụ: '+${ownPitch.getService()}"></p>
                         </div>
                         <div class="tab-pane fade" id="review" role="tabpanel" aria-labelledby="review-tab">
                             <div class="review-heading">Đánh giá</div>
@@ -374,9 +372,8 @@
     }
 
     function getIdYard() {
-        var idyard = document.getElementById("yard");
-        var strUser = idyard.value;
-        $.ajax('/yard/getTime/' + strUser,   // request url
+        var idyard = document.getElementById("yard").value;
+        $.ajax('/yard/getTime/' + idyard,   // request url
             {
                 success: function (data, status, xhr) {// success callback function
                     console.log(data);
@@ -384,12 +381,13 @@
                     data.map(p => $("#getTimeAndPrice").append(`
                                             <div class="col-md-3" onclick="getPrice(${p.price})">
                                                 <label class="btn btn-block btn-outline-dark" >
-                                                    <input name="id" value="${p.id}" type="radio" checked autocomplete="off" style="display: none"  >${p.startTime} - ${p.endTime}
+                                                         <input name="id" value="${p.id}" type="radio" checked autocomplete="off" style="display: none"  >${p.startTime} - ${p.endTime}
                                                 </label>
                                             </div>
                                             `))
                 }
             });
+
         ;
 
     };

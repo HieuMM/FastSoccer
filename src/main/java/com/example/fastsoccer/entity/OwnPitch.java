@@ -53,8 +53,8 @@ public class OwnPitch {
     private String service;
     @Column(name = "status",nullable = true)//trạng thái chờ duyệt
     private Boolean status;
-    @Column(name = "createacc",nullable = true)//trạng thái chờ duyệt
-    private String createacc;
-    @OneToMany(mappedBy = "ownPitch", cascade = CascadeType.ALL)
+    @Column(name = "disable",nullable = true)//trạng thái ẩn sân
+    private Boolean disable;
+    @OneToMany(mappedBy = "ownPitch", cascade = CascadeType.PERSIST)
     private List<Yard> yardList;
 }

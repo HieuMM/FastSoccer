@@ -84,7 +84,7 @@ public class OwnPitchController {
             System.out.println("ko upload duoc");
             e.printStackTrace();
         }
-
+        ownPitch.setStatus(null);
         ownPitchRepository.save(ownPitch);
         return "thankyou.html";
     }
@@ -98,15 +98,16 @@ public class OwnPitchController {
         model.addAttribute("yardList", yardList);
         return "homeOwn";
     }*/
-@Autowired
+    @Autowired
     BookingService bookingService;
+
     @RequestMapping("load-manager-own")
     public String load(Model model, HttpSession session) {
         UserEntity userEntity = (UserEntity) session.getAttribute("user");
         model.addAttribute("user", userEntity);
 
         List<Booking> bookingList = bookingService.findAllByPriceYardID_YardId_OwnPitch_IdAndStatusIsTrue(userEntity.getIdOwn());
-       // List<Booking> bookingList = bookingService.findAll();
+        // List<Booking> bookingList = bookingService.findAll();
         model.addAttribute("bookingList", bookingList);
         return "ownmanager";
     }
@@ -130,12 +131,14 @@ public class OwnPitchController {
         model.addAttribute("user", userEntity);
         return "add-yard";
     }
-//thêm sân nhỏ
+
+    //thêm sân nhỏ
     @PostMapping("/addyard")
     public String addYard(Yard yard) {
         yardRepository.save(yard);
         return "redirect:/loadyardmanagerown";
     }
+
     //xóa sân nhỏ
     @GetMapping("/deleteYard")
     public String deleteYard(@RequestParam("id") Long id) {

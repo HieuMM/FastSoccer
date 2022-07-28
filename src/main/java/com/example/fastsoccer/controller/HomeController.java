@@ -143,13 +143,13 @@ public class HomeController {
         UserEntity userEntity = (UserEntity) session.getAttribute("user");
         booking.setUserId(userEntity);
         booking = bookingService.save(booking);
-        if (userEntity.getBookingList() != null) {
-            userEntity.getBookingList().add(booking);
-        } else {
-            userEntity.setBookingList(new ArrayList<Booking>());
-            userEntity.getBookingList().add(booking);
-        }
-        userEntity.getBookingList().add(booking);
+//        if (userEntity.getBookingList() != null) {
+//            userEntity.getBookingList().add(booking);
+//        } else {
+//            userEntity.setBookingList(new ArrayList<Booking>());
+//            userEntity.getBookingList().add(booking);
+//        }
+//        userEntity.getBookingList().add(booking);
 
         userRepository.save(userEntity);
         String vnp_Version = "2.1.0";
@@ -274,7 +274,7 @@ public class HomeController {
         bookingService.save(booking);
         //gưi tinh nhắn thông báo đến user
         UserEntity userEntity = (UserEntity) session.getAttribute("user");
-        Twilio.init("ACb451dd21c4c07f810dd8d7d3351678bf", "78291a4460246323349d348c30ec9e5f");
+        Twilio.init(ACCOUNT_SID, AUTH_ID);
         String truePhone = substring(userEntity.getUsername(), 1);
         Message.creator(new PhoneNumber("+84" + truePhone),
                 new PhoneNumber("+14845099386"), "Fast soccer thông tin đặt sân: " + booking.getPriceYardID().getYardId().getName() + " thời gian: " + booking.getPriceYardID().getStartTime() + "-" + booking.getPriceYardID().getEndTime()).create();
@@ -338,10 +338,10 @@ public class HomeController {
             userRepository.save(userEntity);
             String message = "OTP của bạn là: " + otp;
             //gưi tinh nhắn thông báo đến user
-       /*     Twilio.init(ACCOUNT_SID, AUTH_ID);
+            Twilio.init(ACCOUNT_SID, AUTH_ID);
             String truePhone = substring(userEntity.getUsername(), 1);
             Message.creator(new PhoneNumber("+84" + truePhone),
-                    new PhoneNumber("+14845099386"), message).create();*/
+                    new PhoneNumber("+14845099386"), message).create();
             model.addAttribute("otp", otp);
             return "changePassword";
         }
@@ -408,5 +408,6 @@ public class HomeController {
 
 
     }
+
 }
 

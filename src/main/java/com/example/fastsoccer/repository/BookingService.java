@@ -23,6 +23,9 @@ public interface BookingService extends JpaRepository<Booking, Long> {
     @Query("select b.priceYardID.id from Booking b where b.dateBooking=?1 and b.priceYardID.yardId.id=?2 and b.status = true")
     List<Long> findAllPriceYardIsBooking(Date dateB,Long id);
 
-
+    @Query("SELECT count(r.id) FROM Booking r")
+    int countBooking();
+    @Query("Select sum(b.priceYardID.price) from Booking b where b.status = true")
+    int sumAmountBooking();
 }
 

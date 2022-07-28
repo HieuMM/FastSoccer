@@ -97,7 +97,7 @@
                             <td class="tm-product-name" th:text="${yard.name}"></td>
                             <td th:text="${yard.detail}"></td>
                             <td>
-                                <a th:href="|/deleteYard?id=${yard.getId()}|" class="tm-product-delete-link">
+                                <a th:href="|/deleteYard?id=${yard.getId()}|" class="tm-product-delete-link"  onclick="if (!confirm('Bạn có muốn ẩn sân')) { return false }">
                                     <i class="far fa-trash-alt tm-product-delete-icon"></i>
                                 </a>
                             </td>
@@ -176,7 +176,7 @@
 
                         <td class="tm-product-name"> ${p.startTime} - ${p.endTime} : ${p.price} </td>
                             <td class="text-center">
-                                <a th:href="|/deletePrice?id=${p.id}|" class="tm-product-delete-link">
+                                <a th:href="|/deletePrice?id=${p.id}|" class="tm-product-delete-link"  onclick="if (!confirm('Bạn có muốn xóa')) { return false }">
                                     <i class="far fa-trash-alt tm-product-delete-icon"></i>
                                 </a>
                             </td>

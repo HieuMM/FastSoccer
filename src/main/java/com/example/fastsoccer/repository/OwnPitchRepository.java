@@ -13,9 +13,12 @@ import java.util.List;
 
 @Repository
 public interface OwnPitchRepository extends JpaRepository<OwnPitch,Long> {
-    @Query("SELECT u FROM OwnPitch u WHERE u.status=0"  )
+    @Query("SELECT u FROM OwnPitch u WHERE u.status=null"  )
     List<OwnPitch> findOwnPitchWatting();//sân chờ duyệt
-    @Query("SELECT u FROM OwnPitch u WHERE u.status=1"  )
+    @Query("SELECT u FROM OwnPitch u WHERE u.status=true and u.disable=true "  )
     List<OwnPitch> findOwnPitchSuccess();//sân đã được duyệt --b'1'
    OwnPitch findAllByPhone(String phone);
+
+    @Query("SELECT count(r.id) FROM OwnPitch r")
+    int countOwnPitch();
 }

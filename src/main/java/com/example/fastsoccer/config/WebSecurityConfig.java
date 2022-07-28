@@ -67,7 +67,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/load-manager-own", "/loadyardmanagerown", "/loadformaddyard").hasAuthority("OWN")
                 .antMatchers("/booking","/loadMatching").hasAuthority("USER")
                 // Trang chỉ dành cho ADMIN
-                .antMatchers("/admin", "/updateStatus","/update").hasAuthority("ADMIN")
+                .antMatchers("/admin"/*, "/updateStatus","/update"*/).hasAuthority("ADMIN")
                 .and().exceptionHandling().accessDeniedPage("/403")
                 // Cấu hình cho Login Form.
                 .and().formLogin()//
